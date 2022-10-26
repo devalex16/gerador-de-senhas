@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+img {
+  width: 50%;
+}
+
+#padre div {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50%;
+  text-align: center;
+  vertical-align: middle;
+  background-color: red;
+  color: white;
+  height: 50vh;
+  animation: test 2s ease-in infinite;
+}
+
+#padre {
+  position: relative;
+}
+
+@keyframes test {
+  from {
+    background: turquoise;
+  }
+  to {
+    background: violet;
+    scale: 30px;
+  }
+}
+
+.formTest input,
+.formTest button {
+  padding: 20px;
+}
