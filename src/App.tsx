@@ -1,7 +1,8 @@
-import { Texto } from './componentes/texto';
 import GlobalsStyle from './styles/Globals';
-import Header from './componentes/Header';
-import Block, {Password} from './componentes/Generator';
+import Responsive from './styles/Responsive';
+
+import Header from './components/Header';
+import Block from './components/Generator';
 
 import styled from 'styled-components';
 
@@ -12,13 +13,13 @@ const Main = styled.main`
   justify-content: center;
   height: 70vh;
   width: 100vw;
-  y-overflow: hidden;
 `;
 
 function App() {
   return (
     <div>
       <GlobalsStyle />
+      <Responsive />
       <Header>PassGenerator</Header>
       <Main>
         <Block/>

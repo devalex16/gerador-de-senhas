@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 
+//[Estilos]
 const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 80vw;
-  width: 80vw;
+  max-height: 1000px;
+  max-width: 1000px;
+  margin: 10px;
+  padding: 40px;
   box-shadow: 1px 1px 10px #2B3245 inset;
   border-radius: 20px;
   background-color: rgb(194, 200, 204);
 `;
 
-const TextInformation = styled.h1`
-  font-size: 1.5em;
+const TextInformation = styled.h2`
   font-weight: bold;
   text-align: center;
   color: rgb(14, 21, 37);
@@ -30,7 +32,6 @@ const AlignLabel = styled.span`
 `;
 
 const LabelRange = styled.p`
-  font-size: 1.5em;
   font-weight: bold;
   text-align: center;
   color: rgb(14, 21, 37);
@@ -39,7 +40,6 @@ const LabelRange = styled.p`
 `;
 
 const Text = styled.p`
-  font-size: 0.9em;
   font-weight: 500;
   text-align: center;
   color: rgb(14, 21, 37);
@@ -47,7 +47,6 @@ const Text = styled.p`
 `;
 
 const TextPass = styled.p`
-  font-size: 1.3em;
   font-weight: bold;
   text-align: center;
   color: rgb(14, 21, 37);
@@ -58,12 +57,10 @@ const TextPass = styled.p`
   background-color: rgb(194, 200, 204);
   width: 100%;
   bottom: -20vh;
-  /*left: -35px;*/
   position: absolute;
 `;
 
 const ButtonPass = styled.button`
-  font-size: 1em;
   font-weight: bold;
   text-align: center;
   color: rgb(14, 21, 37);
@@ -73,26 +70,16 @@ const ButtonPass = styled.button`
   margin-top: 10px;
   background-color: #6FEB78;
 `;
+//[/Estilos]
 
-const styleInput = {
-  range: {
-    margin: '10px 0px',
-    width: '70%',
-  },
-  
-  checkbox: {
-    width: '20px',
-    height: '20px',
-  }
-}
-
+//Componente da Senha
 type passProps = {
   text:string;
 }
 
 function Password(props: passProps) {
   return (
-    <TextPass>{props.text}</TextPass>
+    <TextPass id="password">{props.text}</TextPass>
   );
 }
 
@@ -101,9 +88,14 @@ function InputAndEvents() {
   const [isUpper, setIsUpper] = useState(true);
   const [isAll, setIsAll] = useState(true);
   const [pass, setPass] = useState('...')
-  const characters  = ['abcdefghijklmnoqwrsuxyz','#$_&/@!?"_+*\%=']; 
   
+  //Caracteres da Senhas
+  const characters  = ['abcdefghijklmnoqwrsuxyz','#$_&/@!?"_+*\%='];
+
+  //Escutando Eventos
   function listenerInput(event){
+    //Pegando o Input com os Nomes
+    //Atualizando os Dados
     if (event.target.name === 'countStr') {
       setCountStr(event.target.value)
     } else if (event.target.name === 'isUpper') {
@@ -115,33 +107,24 @@ function InputAndEvents() {
     
   }
 
+  //Pegando número inteiro Aleatório
   function getNumberInt(max) {
     return Math.floor(Math.random() * max);
   }
 
-  function allCharacters(password, simbols, i) {
-    console.log(password);
-   // console.log(simbols);
-    if (isUpper === true) {
-        if (i < getNumberInt(18)) {      
-          return password = password.concat(simbols[getNumberInt(simbols.length)]).toUpperCase();
-        } else {         
-          return password = password.concat(simbols[getNumberInt(simbols.length)])
-        }        
-      }
-   // setPass(password.toString())
-  }
-
-//console.log(getNumberInt(10))
-  async function clickButton() { 
+  //Evento de Click
+  function clickButton() { 
+    //Cria variável para armazenar senha
     let password = ''
-    console.log('click!')
-    for (let i = 0; i < countStr; i++){
+    //Loop até o máximo de Caracteres
+    for (let i = 0; i < countStr; i++) {
       let simbols  = characters[0]
+      //Se Todos os Caracteres for ativo [Checkbox - isAll]
       if (isAll === true) {
         simbols  = characters[getNumberInt(2)]
+        //[Checkbox - isUpper]
         if (isUpper === true) {
-          if (i < getNumberInt(18)) {      
+          if (i < getNumberInt(18)) {
             password = password.concat(simbols[getNumberInt(simbols.length)]).toUpperCase();
           } else {         
             password = password.concat(simbols[getNumberInt(simbols.length)])
@@ -149,10 +132,15 @@ function InputAndEvents() {
         } else {
            password = password.concat(simbols[getNumberInt(simbols.length)])
         }
+      //Se Todos os Caracteres não for Ativo [Checkbox - isAll]
       } else {
+        //[Checkbox - isUpper]
         if (isUpper === true) {
-          if (i < getNumberInt(18)) {      
+          //Se var i for menor do que um número aleatório de 0 á 18
+          //Se for menor - Letra Maiúscula
+          if (i < getNumberInt(18)) {
             password = password.concat(simbols[getNumberInt(simbols.length)]).toUpperCase();
+          //Se não for menor - Letra Minúscula
           } else {         
             password = password.concat(simbols[getNumberInt(simbols.length)])
           }
@@ -161,27 +149,28 @@ function InputAndEvents() {
         }
       }
     }
+    //No final de todo o Processo, Atualiza!
     setPass(password.toString())
   }
   return (
     <div style={{width: '100%'}}>
       <Text>Número de Caracteres:</Text>
       <AlignLabel>
-        <input style={styleInput.range} name="countStr" type="range" min="0" max="20" onChange={listenerInput}/>
-        <LabelRange>{countStr}</LabelRange>
+        <input id="range" name="countStr" type="range" min="0" max="20" onChange={listenerInput}/>
+        <LabelRange id="count">{countStr}</LabelRange>
       </AlignLabel>
       <AlignLabel>
-        <input style={styleInput.checkbox} name="isUpper" type="checkbox" onChange={listenerInput} checked={isUpper}/>
+       <input name="isUpper" type="checkbox" onChange={listenerInput} checked={isUpper}/>
         <Text>Letras Maiúsculas</Text>
       </AlignLabel>
       <AlignLabel>
-        <input style={styleInput.checkbox} name="isAll" type="checkbox" onChange={listenerInput} checked={isAll}/>
-      <Text>Todos os Caracteres</Text>
+        <input name="isAll" type="checkbox" onChange={listenerInput} checked={isAll}/>
+        <Text>Todos os Caracteres</Text>
       </AlignLabel>
       <AlignLabel>
-      <ButtonPass onClick={clickButton}>Criar</ButtonPass>
-      <Password text={pass}/>
-       </AlignLabel>
+        <ButtonPass onClick={clickButton}>Criar</ButtonPass>
+        <Password text={pass}/>
+      </AlignLabel>
     </div>
   );
 }

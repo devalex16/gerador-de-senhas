@@ -7,12 +7,12 @@ export default createGlobalStyle`
     position: relative;
   }
   
- html, body {
+  html, body {
     max-height: 100vh;
     max-width: 100vw;
     background-color: rgb(14, 21, 37);
     color: white;
     font-family: Arial, sans-serif;
-  }
+  } 
 `;
 

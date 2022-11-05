@@ -10,7 +10,7 @@ const Header = styled.header`
 `;
 
 const TextHeader = styled.h1`
-  font-size: 1.1em;
+  font-weight: bold;
 `;
 
 type TextProps = {
